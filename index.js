@@ -1,22 +1,24 @@
 const express = require("express");
 const Twitter = require("twitter-lite");
-const cors = require("cors"); // add this line
+const cors = require("cors");
 
 const app = express();
 
-app.use(cors()); // add this line
+app.use(cors());
 
 const client = new Twitter({
   subdomain: "api",
-  consumer_key: "7Oeq9yCjKP6unnpyjyuandmpm",
-  consumer_secret: "uwFwqG5CYaHcZ05LSSZ6ZnouH1M1hmkpXXir0qWpk9I791hFr6",
-  access_token_key: "28352103-3O9tWN8WfF1cd7lpqHNLAQ6o594YqSl73gF9SInjo",
-  access_token_secret: "LV0rHEUYhfIopMx55FI3PipggWmSLS3VnJ4CGfmAtUivE",
+  consumer_key: "your_consumer_key",
+  consumer_secret: "your_consumer_secret",
+  access_token_key: "your_access_token_key",
+  access_token_secret: "your_access_token_secret",
 });
 
 app.get("/followercount", (req, res) => {
+  const screen_name = req.query.screen_name || "jorisrood";
+
   client
-    .get("users/show", { screen_name: "jorisrood" })
+    .get("users/show", { screen_name })
     .then((user) => {
       console.log(`@${user.screen_name} has ${user.followers_count} followers.`);
       res.json({ count: user.followers_count });
@@ -30,5 +32,3 @@ app.get("/followercount", (req, res) => {
 app.listen(3001, () => {
   console.log("Server listening on port 3001");
 });
-
-
