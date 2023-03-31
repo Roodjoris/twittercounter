@@ -3,6 +3,8 @@ const Twitter = require("twitter-lite");
 
 const app = express();
 
+app.use(cors()); // add this line
+
 const client = new Twitter({
   subdomain: "api",
   consumer_key: "7Oeq9yCjKP6unnpyjyuandmpm",
@@ -27,3 +29,5 @@ app.get("/followercount", (req, res) => {
 app.listen(3001, () => {
   console.log("Server listening on port 3001");
 });
+
+
