@@ -1,5 +1,6 @@
 const express = require("express");
 const Twitter = require("twitter-lite");
+const cors = require("cors"); // add this line
 
 const app = express();
 
